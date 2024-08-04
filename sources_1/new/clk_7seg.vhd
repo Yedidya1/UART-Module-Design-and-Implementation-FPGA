@@ -1,3 +1,5 @@
+-- This block generates 200Hz clock signal only for the 7 segment display component.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -6,7 +8,6 @@ entity clk_7seg is
          clk200Hz: out std_logic);
 end clk_7seg;
 
--- this block generates 200Hz clock signal for the 7 segment display 
 architecture Behavioral of clk_7seg is
 
 signal count: integer range 0 to 250000:= 0;

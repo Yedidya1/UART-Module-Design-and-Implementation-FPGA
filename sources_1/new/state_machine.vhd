@@ -1,5 +1,6 @@
--- This file contain two state machine designs, one of the receiver an the second of the transmitter
+-- This file contain two state machine designs, one of the receiver and the second of the transmitter
 
+-- Receiver state machine:
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -34,7 +35,7 @@ end process;
 end Behavioral;
 
 
--- transmitter state machine 
+-- transmitter state machine: 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 

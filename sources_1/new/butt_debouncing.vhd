@@ -1,3 +1,9 @@
+-- This file contains 3 entities that together create the button debouncing block:
+-- 1. top debouncing
+-- 2. D flip-flop
+-- 3. generic N bit counter
+-- The three entities are arranged in this order in the code.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -23,15 +29,29 @@ signal q1,q2,Cout,clr,enb_ctr: std_logic;
 
 begin
 
-FF1: d_ff port map(d=>button_in,clk=>clk,rst=>rst,enb=>'1',q=>q1);
-FF2: d_ff port map(d=>q1,clk=>clk,rst=>rst,enb=>'1',q=>q2);
-FF3: d_ff port map(d=>q2,clk=>clk,rst=>rst,enb=>Cout,q=>button_out);
+FF1: d_ff port map(		d => button_in,
+					  clk => clk,
+					  rst => rst,
+					  enb => '1',
+					    q => q1			);
+						
+FF2: d_ff port map(		d => q1,
+					  clk => clk,
+					  rst => rst,
+					  enb => '1',
+					    q => q2			);
+						
+FF3: d_ff port map(		d => q2,
+					  clk => clk,
+					  rst => rst,
+					  enb => Cout,
+					    q => button_out);
 
-CTR: Nbit_counter port map(     clk=>clk,
-                                clr=>clr,
-                                enb=>enb_ctr,
-                                rst=>rst,
-                                Cout=>Cout      );
+CTR: Nbit_counter port map(     clk => clk,
+                                clr => clr,
+                                enb => enb_ctr,
+                                rst => rst,
+                                Cout => Cout      );
 
 clr <= q1 xor q2;
 enb_ctr <= not Cout;

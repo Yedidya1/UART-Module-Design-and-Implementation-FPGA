@@ -42,16 +42,32 @@ signal count: std_logic_vector(3 downto 0);
 
 begin
 
-SM: state_machine_trans port map(send=>stable_send,clk=>clk100M,rst=>rst,rst_state=>end_count,state=>state);
+SM:     state_machine_trans port map(		send => stable_send,
+											 clk => clk100M,
+											 rst => rst,
+									   rst_state => end_count,
+										   state => state			);
 
-CTR: counter_trans port map(clk=>clk_UART,enb=>state,count=>count);
+CTR:            counter_trans port map(		 clk => clk_UART,
+											 enb => state,
+										   count => count			);
 
-UART_CLK: clk_UART_trans generic map(baud_rate=>9600)
-                         port map(clk100M=>clk100M,rst=>rst,clk_UART=>clk_UART);
+UART_CLK:  clk_UART_trans generic map(baud_rate => 9600)
+						  port map(	     clk100M => clk100M,
+											 rst => rst,
+										clk_UART => clk_UART		);
 
-OUTREG: PISO_reg port map(d_in=>Tx_data,counter=>count,clk=>clk_UART,rst=>rst,enb=>state,serial_out=>Tx);
+OUTREG:          PISO_reg port map(	        d_in => Tx_data,
+										 counter => count,
+											 clk => clk_UART,
+											 rst => rst,
+											 enb => state,
+									  serial_out => Tx				);
 
-DEBOUNCE: butt_debouncing port map(clk=>clk100M,button_in=>valid_send,rst=>rst,button_out=>stable_send);
+DEBOUNCE: butt_debouncing port map(			 clk => clk100M,
+									   button_in => valid_send,
+									      	 rst => rst,
+									  button_out => stable_send		);
 
 end_count <= '1' when count=X"B" else '0';
 ready <= not state;

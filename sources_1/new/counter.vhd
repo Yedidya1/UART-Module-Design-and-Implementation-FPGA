@@ -1,3 +1,7 @@
+-- The file contains two designs of counter, the first is the receiver counter 
+-- and the second is the transmitter counter. the designs are a little bit different 
+-- from each other according to the unit needs.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.ALL;

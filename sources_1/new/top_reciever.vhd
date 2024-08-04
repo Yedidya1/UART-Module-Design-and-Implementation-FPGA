@@ -59,18 +59,32 @@ signal mux_out: std_logic_vector(3 downto 0);
 
 begin
 
---ILA_instance: ila_0 port map(clk=>clk100M,probe0=>Rx,probe1=>parallel_data,probe2=>clk100M);
-
 UARTclk: clk_UART_rec generic map(baud_rate=>9600)
-                   port map(clk100M=>clk100M,start=>state,rst=>rst,clk_UART=>clk_UART,s=>s);
+					  port map(	clk100M => clk100M,
+								  start => state,
+								    rst => rst,
+							   clk_UART => clk_UART,
+									  s => s 				);
                    
-CTR: counter_rec port map(clk=>enabled_UART_clk,rst=>reset_count,count=>count);
+CTR: 	  counter_rec port map(		clk => enabled_UART_clk,
+									rst => reset_count,
+								  count => count			);
 
-SM: state_machine_rec port map(Rx=>Rx,rst=>rst,count=>count,state=>sync_state,clk=>clk100M);
+SM: state_machine_rec port map(		 Rx => Rx,
+									rst => rst,
+								  count => count,
+								  state => sync_state,
+								    clk => clk100M			);
 
-SH_R: input_shift_reg port map(rst=>rst,clk=>clk_UART,enb=>enb_input,d_in=>Rx,d_out=>parallel_data);
+SH_R: input_shift_reg port map(		rst => rst,
+									clk => clk_UART,
+									enb => enb_input,
+								   d_in => Rx,
+								  d_out => parallel_data	);
 
-seg7_clk: clk_7seg port map(clk100M=>clk100M,rst=>rst,clk200Hz=>clk200Hz);
+seg7_clk: 	 clk_7seg port map( clk100M => clk100M,
+									rst => rst,
+							   clk200Hz => clk200Hz);
 
 state<=sync_state or s;
 
@@ -100,9 +114,12 @@ process(anode) begin
 end process;
 
 --display modules
-sev_seg_dec: seven_seg_decoder port map(d_in=>mux_out,d_out=>seven_seg_disp);
+sev_seg_dec:   seven_seg_decoder port map(	d_in => mux_out,
+										   d_out => seven_seg_disp	);
 
-anode_control_sig: anode_control port map(clk=>clk200Hz,rst=>rst,anode=>anode);
+anode_control_sig: anode_control port map(   clk => clk200Hz,
+											 rst => rst,
+										   anode => anode			);
 
 sel_disp_dig(1 downto 0)<=anode;
 sel_disp_dig(7 downto 2)<="111111";

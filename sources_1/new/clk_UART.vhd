@@ -1,3 +1,8 @@
+-- This file includes two clock dividers, both outputs 9600Hz clock signals.
+-- The first belong to the receiver and the second to the transmitter. They are 
+-- quite similar except the receiver divider has another feature to start 
+-- a cycle when a certain input trigger it.
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
