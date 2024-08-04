@@ -21,9 +21,7 @@ constant cyc9600: time := 104166ns;
 
 begin
 
-DUT: clk_UART1 
-     --generic map(baud_rate => 9600)
-     port map(clk100M=>clk100M,start=>start,clk_UART=>clk_UART,rst=>rst);
+DUT: clk_UART1 port map(clk100M=>clk100M,start=>start,clk_UART=>clk_UART,rst=>rst);
 
 process begin
     clk100M<=not clk100M;

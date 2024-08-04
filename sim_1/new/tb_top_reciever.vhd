@@ -2,15 +2,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use ieee.math_real.all;    -- for uniform & trunc functions
 use ieee.numeric_std.all;  -- for to_unsigned function
---use std.textio.all;
 
-entity tb_top_reciever is
+entity tb_top_receiver is
 --  Port ( );
-end tb_top_reciever;
+end tb_top_receiver;
 
-architecture Behavioral of tb_top_reciever is
+architecture Behavioral of tb_top_receiver is
 
-component top_reciever is
+component top_receiver is
      port(clk100M,Rx,rst: in std_logic;
          data_buff,sel_disp_dig: out std_logic_vector(7 downto 0);
          seven_seg_disp: out std_logic_vector(6 downto 0);
@@ -29,18 +28,20 @@ constant cycUART: time := 104.166us;
 
 begin
 
-DUT: top_reciever port map(clk100M=>clk100M,Rx=>Rx,rst=>rst,seven_seg_disp=>seven_seg_disp,sel_disp_dig=>sel_disp_dig,data_buff=>data_buff,valid=>valid);
+DUT: top_receiver port map(clk100M=>clk100M,Rx=>Rx,rst=>rst,seven_seg_disp=>seven_seg_disp,sel_disp_dig=>sel_disp_dig,data_buff=>data_buff,valid=>valid);
 
 process begin
     clk100M<=not clk100M;
     wait for cyc100M/2;
 end process;
 
+-- This process contain creation of random 8-bit test data and then it fed into the receiver 
+-- through Rx signal. 
 process 
-variable seed1, seed2: positive;  -- seed values for random generator
-variable rand: real;              -- random real-number value in range 0 to 1.0
-variable int_rand: integer;       -- random integer value in range 0..4095
-variable stim: std_logic_vector(7 downto 0);  -- random 12-bit stimulus
+variable seed1, seed2: positive;  				-- seed values for random generator
+variable rand: real;              				-- random real-number value in range 0 to 1.0
+variable int_rand: integer;       				-- random integer value in range 0..255
+variable stim: std_logic_vector(7 downto 0); 	-- random 12-bit stimulus
 begin
     test_data <= (others=>'0');
     wait for cyc100M/2;

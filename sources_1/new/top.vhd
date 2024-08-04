@@ -11,7 +11,7 @@ end top;
 
 architecture Behavioral of top is
 
-component top_reciever is
+component top_receiver is
     port(clk100M,Rx,rst: in std_logic;
          data_buff,sel_disp_dig: out std_logic_vector(7 downto 0);
          seven_seg_disp: out std_logic_vector(6 downto 0);
@@ -26,7 +26,7 @@ end component;
 
 begin
 
-TOP_REC: top_reciever port map(       clk100M => clk100M,
+TOP_REC: top_receiver port map(       clk100M => clk100M,
                                            Rx => Rx,
                                           rst => rst,
                                     data_buff => recieved_data,

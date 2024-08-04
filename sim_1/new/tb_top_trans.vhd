@@ -31,10 +31,10 @@ process begin
 end process;
 
 process 
-variable seed1, seed2: positive;  -- seed values for random generator
-variable rand: real;              -- random real-number value in range 0 to 1.0
-variable int_rand: integer;       -- random integer value in range 0..255
-variable stim: std_logic_vector(7 downto 0);  -- random 8-bit stimulus
+variable seed1, seed2: positive;  				-- seed values for random generator
+variable rand: real;              				-- random real-number value in range 0 to 1.0
+variable int_rand: integer;       				-- random integer value in range 0..255
+variable stim: std_logic_vector(7 downto 0);  	-- random 8-bit stimulus
 variable interval: time;
 begin
     rst<='1'; Tx_data<=X"AA"; send<='0';

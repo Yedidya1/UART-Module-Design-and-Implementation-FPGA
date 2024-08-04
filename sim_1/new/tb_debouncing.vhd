@@ -30,7 +30,7 @@ end process;
 process 
 variable seed1, seed2: positive;  -- seed values for random generator
 variable rand: real;              -- random real-number value in range 0 to 1.0
-variable delay : integer;       -- random integer value in range 0..255
+variable delay : integer;         -- random integer value in range 0..5
 begin 
     rst<='1'; button_in<='0';
     wait for 1.3*cyc9600;

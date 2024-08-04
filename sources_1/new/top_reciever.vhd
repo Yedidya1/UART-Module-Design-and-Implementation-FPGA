@@ -2,14 +2,14 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
 
-entity top_reciever is
+entity top_receiver is
     port(clk100M,Rx,rst: in std_logic;
          data_buff,sel_disp_dig: out std_logic_vector(7 downto 0);
          seven_seg_disp: out std_logic_vector(6 downto 0);
          valid: out std_logic);
-end top_reciever;
+end top_receiver;
 
-architecture Behavioral of top_reciever is
+architecture Behavioral of top_receiver is
 
 component clk_UART_rec is
     generic(baud_rate: integer := 9600);
@@ -60,31 +60,31 @@ signal mux_out: std_logic_vector(3 downto 0);
 begin
 
 UARTclk: clk_UART_rec generic map(baud_rate=>9600)
-					  port map(		clk100M => clk100M,
+					  port map(	clk100M => clk100M,
 								  start => state,
 								    rst => rst,
-							       clk_UART => clk_UART,
-								      s => s 				);
+							   clk_UART => clk_UART,
+									  s => s 				);
                    
-CTR: 	  		      counter_rec port map(		    clk => enabled_UART_clk,
-								    rst => reset_count,
+CTR: 	  counter_rec port map(		clk => enabled_UART_clk,
+									rst => reset_count,
 								  count => count			);
 
-SM: 			state_machine_rec port map(		     Rx => Rx,
-								    rst => rst,
+SM: state_machine_rec port map(		 Rx => Rx,
+									rst => rst,
 								  count => count,
 								  state => sync_state,
 								    clk => clk100M			);
 
-SH_R: 			  input_shift_reg port map(		    rst => rst,
-								    clk => clk_UART,
-							  	    enb => enb_input,
+SH_R: input_shift_reg port map(		rst => rst,
+									clk => clk_UART,
+									enb => enb_input,
 								   d_in => Rx,
-								  d_out => parallel_data		);
+								  d_out => parallel_data	);
 
-seg7_clk: 	 	        clk_7seg port map( 		clk100M => clk100M,
-								    rst => rst,
-							       clk200Hz => clk200Hz			);
+seg7_clk: 	 clk_7seg port map( clk100M => clk100M,
+									rst => rst,
+							   clk200Hz => clk200Hz);
 
 state<=sync_state or s;
 
@@ -114,12 +114,12 @@ process(anode) begin
 end process;
 
 --display modules
-sev_seg_dec:   		seven_seg_decoder port map(		 d_in => mux_out,
-								d_out => seven_seg_disp		);
+sev_seg_dec:   seven_seg_decoder port map(	d_in => mux_out,
+										   d_out => seven_seg_disp	);
 
-anode_control_sig:	    anode_control port map(   		  clk => clk200Hz,
-								  rst => rst,
-								anode => anode			);
+anode_control_sig: anode_control port map(   clk => clk200Hz,
+											 rst => rst,
+										   anode => anode			);
 
 sel_disp_dig(1 downto 0)<=anode;
 sel_disp_dig(7 downto 2)<="111111";

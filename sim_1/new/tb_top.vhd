@@ -28,17 +28,17 @@ constant cycUART: time := 104.166us;
 
 begin
 
-DUT: top port map(  clk100M=>clk,
-                    Rx=>Rx,
-                    rst=>rst,
-                    send=>send,
-                    switches=>switches,
-                    Tx=>Tx,
-                    ready=>ready,
-                    valid=>valid,
-                    recieved_data=>recieved_data,
-                    sel_disp_dig=>sel_disp_dig,
-                    seven_seg_disp=>seven_seg_disp  );
+DUT: top port map(  clk100M => clk,
+                    Rx => Rx,
+                    rst => rst,
+                    send => send,
+                    switches => switches,
+                    Tx => Tx,
+                    ready => ready,
+                    valid => valid,
+                    recieved_data => recieved_data,
+                    sel_disp_dig => sel_disp_dig,
+                    seven_seg_disp => seven_seg_disp  );
                     
 process begin
     clk <= not clk;
@@ -49,9 +49,9 @@ end process;
 -- The scenario in the simulation is first sending few packages of random data
 -- and then receiving.
 process 
-variable seed1, seed2: positive;  -- seed values for random generator
-variable rand: real;              -- random real-number value in range 0 to 1.0
-variable delay,int_rand : integer;       -- random integers value in range 0..n
+variable seed1, seed2: positive;  			-- seed values for random generator
+variable rand: real;              			-- random real-number value in range 0 to 1.0
+variable delay,int_rand : integer;       	-- random integers value in range 0..n
 variable stim: std_logic_vector(7 downto 0);
 begin
     switches<=X"62"; Rx<='1'; rst<='1'; send<='0';
