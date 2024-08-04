@@ -28,7 +28,13 @@ constant cycUART: time := 104.166us;
 
 begin
 
-DUT: top_receiver port map(clk100M=>clk100M,Rx=>Rx,rst=>rst,seven_seg_disp=>seven_seg_disp,sel_disp_dig=>sel_disp_dig,data_buff=>data_buff,valid=>valid);
+DUT: top_receiver port map(          clk100M => clk100M,
+                                          Rx => Rx,
+                                         rst => rst, 
+                              seven_seg_disp => seven_seg_disp,
+                                sel_disp_dig => sel_disp_dig,
+                                   data_buff => data_buff,    
+                                       valid => valid               );
 
 process begin
     clk100M<=not clk100M;

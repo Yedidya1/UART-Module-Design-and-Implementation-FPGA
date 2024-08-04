@@ -23,7 +23,11 @@ constant cyc: time := 10ns;
 
 begin
 
-DUT: top_transmitter port map(Tx_data=>Tx_data,clk100M=>clk,send=>send,rst=>rst,Tx=>Tx);
+DUT: top_transmitter port map(        Tx_data => Tx_data,
+                                      clk100M => clk,
+                                         send => send,
+                                          rst => rst,
+                                           Tx => Tx            );
 
 process begin
     clk <= not clk;
