@@ -1,3 +1,5 @@
+-- This file contain two state machine designs, one of the receiver an the second of the transmitter
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
