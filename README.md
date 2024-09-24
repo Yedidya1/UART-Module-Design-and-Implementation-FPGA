@@ -1,4 +1,4 @@
-UART Communication Interface - Design and Implementation over FPGAUART Communication Interface - Design and Implementation over FPGA
+UART Communication Interface - Design and Implementation over FPGA:
 
 This project involved designing and implementing a UART communication interface using FPGA and VHDL. I developed the interface, 
 transmitter and receiver, from scratch, enabling reliable serial data exchange between the FPGA and other UART-compatible systems.
@@ -19,8 +19,8 @@ Personal Experience and Learning:
 This project enhanced my skills of:
 - Digital design (while considering practical issues like delays and button bouncing)
 - VHDL programming
-- System debuging 
-- FPGA development. 
+- System vrification and validation
+- FPGA development 
 
 Overcoming challeges such as debugging and adapting the design to the FPGA's constraints strengthened my problem-solving skills and attention
 to details. The hands-on experience deepened my passion for hardware design.
